@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    networks:
+      - internal
+    volumes:
+      - clip_data:/root/.cache/clip
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - internal
+      - api-airflow-network
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+    networks:
+      - internal
+
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: meilisearch
+    environment:
+      - MEILI_MASTER_KEY=testing_key
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+    networks:
+      - internal
+      - api-airflow-network
+volumes:
+  mongo_data:
+    driver: local
+  meilisearch_data:
+    driver: local
+  clip_data:
+    driver: local
+
+networks:
+  internal:
+    driver: bridge
+  api-airflow-network:
+    external: true

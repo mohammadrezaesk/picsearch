@@ -1,0 +1,12 @@
+{
+  "PINECONE_API_KEY": "",
+  "PINECONE_HOST_URL": "https://image-index-f6thjqr.svc.aped-4627-b74a.pinecone.io",
+  "PINECONE_IMAGE_INDEX_NAME": "image-index",
+  "MONGO_COLLECTION": "products",
+  "MONGO_DB": "picsearch",
+  "MONGO_HOST_URL": "mongodb://mongo:27017",
+  "S3_ACCESS_KEY": "",
+  "S3_ENDPOINT": "s3.ir-thr-at1.arvanstorage.ir",
+  "S3_SECRET_KEY": "",
+  "S3_BUCKET_NAME": "searchpic"
+}
